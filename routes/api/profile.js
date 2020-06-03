@@ -34,6 +34,27 @@ router.get(
   }
 );
 
+//@route  api/profile/all
+//@desc   Display all User Profile
+//@access Private
+router.get("/all", (req, res) => {
+  const errors = {};
+
+  Profile.find()
+    .populate("user", ["name", "avatar"])
+    .then((profiles) => {
+      if (!profiles) {
+        errors.noProfiles = "There is no Profile";
+        return res.status(404).json(errors);
+      }
+      return res.json(profiles);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(404).json(err);
+    });
+});
+
 //@route  api/profile
 //@desc   Create or Update User Profile
 //@access Private
@@ -71,21 +92,22 @@ router.post(
     profileFields.social.twitter = !isEmpty(req.body.twitter)
       ? req.body.twitter
       : "";
-    profileFields.social.linkdin = !isEmpty(req.body.linkdin)
-      ? req.body.linkdin
+    profileFields.social.linkedin = !isEmpty(req.body.linkedin)
+      ? req.body.linkedin
       : "";
     profileFields.social.facebook = !isEmpty(req.body.facebook)
       ? req.body.facebook
       : "";
     console.log(profileFields);
     Profile.findOne({ user: req.user.id }).then((profile) => {
+      console.log(profileFields);
       if (profile) {
         //Update Profile
-        Profile.findByIdAndUpdate(
-          { user: req.user.id },
+        Profile.findOneAndUpdate(
+          { user: profile.user },
           { $set: profileFields },
           { new: true }
-        );
+        ).exec();
 
         return res.json({ profile });
       } else {
@@ -107,7 +129,7 @@ router.post(
 );
 
 //@route  api/profile/user/:user
-//@desc   Display Profile infor by User
+//@desc   Display Profile info by User
 //@access Private
 
 router.get("/user/:user", (req, res) => {
@@ -130,7 +152,9 @@ router.get("/user/:user", (req, res) => {
 
 router.get("/handle/:handle", (req, res) => {
   let errors = {};
+  console.log("object");
   Profile.findOne({ handle: req.params.handle })
+    .populate("user", ["name", "avatar"])
     .then((profile) => {
       errors.noProfile = "Profile Not Found!";
       if (!profile) return res.status(404).json(errors);
@@ -195,7 +219,7 @@ router.post(
         current: req.body.current,
         description: req.body.description,
       };
-      console.log(profileEducation);
+
       profile.education.unshift(profileEducation);
 
       profile

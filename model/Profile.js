@@ -37,8 +37,8 @@ const ProfileSchema = new Schema({
     youtube: { type: String },
     facebook: { type: String },
     instagram: { type: String },
-    linkdin: { type: String },
-    twiter: { type: String },
+    linkedin: { type: String },
+    twitter: { type: String },
   },
   date: { type: Date, default: Date.now() },
 });

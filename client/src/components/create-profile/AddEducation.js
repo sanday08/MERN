@@ -124,7 +124,7 @@ class AddEducation extends Component {
                 </div>
 
                 <TextAreaFieldGroup
-                  placeholder="Job Description"
+                  placeholder="Description"
                   name="description"
                   info="Tell us about your experience and what you learned"
                   value={this.state.description}

@@ -5,6 +5,7 @@ import {
   CLEAR_CURRENT_PROFILE,
   ERROR_DISPATCH,
   AUTH_DISPATCH,
+  GET_PROFILES,
 } from "./types";
 
 //get current user Profile
@@ -17,6 +18,20 @@ export const getCurrentProfile = () => (dispatch) => {
       return dispatch({ type: GET_PROFILE, payload: res.data });
     })
     .catch((err) => dispatch({ type: GET_PROFILE, payload: {} }));
+};
+
+//get all profiles
+
+export const getAllProfiles = () => (dispatch) => {
+  dispatch(profileLoading());
+
+  axios
+    .get("/api/profile/all")
+    .then((res) => {
+      console.log(res.data);
+      return dispatch({ type: GET_PROFILES, payload: res.data });
+    })
+    .catch((err) => dispatch({ type: GET_PROFILES, payload: {} }));
 };
 
 //create Profile
@@ -58,7 +73,7 @@ export const clearCurrentProfile = () => {
 
 export const addExperince = (experinceData, history) => (dispatch) => {
   axios
-    .post("api/profile/experience", experinceData)
+    .post("/api/profile/experience", experinceData)
     .then((res) => history.push("/dashboard"))
     .catch((err) =>
       dispatch({ type: ERROR_DISPATCH, payload: err.response.data })
@@ -71,7 +86,7 @@ export const clearError = () => {
 //add Educations
 export const addEducation = (educationData, history) => (dispatch) => {
   axios
-    .post("api/profile/education", educationData)
+    .post("/api/profile/education", educationData)
     .then((res) => history.push("/dashboard"))
     .catch((err) =>
       dispatch({ type: ERROR_DISPATCH, payload: err.response.data })
@@ -81,7 +96,7 @@ export const addEducation = (educationData, history) => (dispatch) => {
 export const deleteEdu = (id) => (dispatch) => {
   if (window.confirm("Are you sure?")) {
     axios
-      .delete(`api/profile/education/${id}`)
+      .delete(`/api/profile/education/${id}`)
       .then((res) => dispatch({ type: GET_PROFILE, payload: res.data }))
       .catch((err) => console.log(err.message));
   }
@@ -91,8 +106,21 @@ export const deleteEdu = (id) => (dispatch) => {
 export const deleteExp = (id) => (dispatch) => {
   if (window.confirm("Are you sure?")) {
     axios
-      .delete(`api/profile/experience/${id}`)
+      .delete(`/api/profile/experience/${id}`)
       .then((res) => dispatch({ type: GET_PROFILE, payload: res.data }))
       .catch((err) => console.log(err.message));
   }
+};
+
+//Get profile via handle
+
+export const getProfile = (handle) => (dispatch) => {
+  console.log(handle);
+  profileLoading();
+  axios
+    .get(`/api/profile/handle/${handle}`)
+    .then((res) => dispatch({ type: GET_PROFILE, payload: res.data }))
+    .catch((err) =>
+      dispatch({ type: ERROR_DISPATCH, payload: err.response.data })
+    );
 };

@@ -24,8 +24,8 @@ class CreateProfile extends Component {
       youtube: "",
       facebook: "",
       instagram: "",
-      linkdin: "",
-      twiter: "",
+      linkedin: "",
+      twitter: "",
       errors: {},
     };
   }
@@ -44,8 +44,8 @@ class CreateProfile extends Component {
       youtube: this.state.youtube,
       facebook: this.state.facebook,
       instagram: this.state.instagram,
-      linkdin: this.state.linkdin,
-      twiter: this.state.twiter,
+      linkedin: this.state.linkedin,
+      twitter: this.state.twitter,
     };
     console.log(profileData);
     this.props.createProfile(profileData, this.props.history);
@@ -199,7 +199,7 @@ class CreateProfile extends Component {
                       name="twitter"
                       onChange={this.onChange}
                       error={errors.twitter}
-                      value={this.state.twiter}
+                      value={this.state.twitter}
                     />
 
                     <InputGroup
@@ -219,7 +219,7 @@ class CreateProfile extends Component {
                       name="linkedin"
                       onChange={this.onChange}
                       error={errors.linkedin}
-                      value={this.state.linkdin}
+                      value={this.state.linkedin}
                     />
 
                     <InputGroup

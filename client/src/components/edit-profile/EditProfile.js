@@ -29,8 +29,8 @@ class EditProfile extends Component {
       youtube: "",
       facebook: "",
       instagram: "",
-      linkdin: "",
-      twiter: "",
+      linkedin: "",
+      twitter: "",
       errors: {},
     };
     // props.clearError();
@@ -50,8 +50,8 @@ class EditProfile extends Component {
       youtube: this.state.youtube,
       facebook: this.state.facebook,
       instagram: this.state.instagram,
-      linkdin: this.state.linkdin,
-      twiter: this.state.twiter,
+      linkedin: this.state.linkedin,
+      twitter: this.state.twitter,
     };
     this.props.createProfile(profileData, this.props.history);
   };
@@ -86,13 +86,13 @@ class EditProfile extends Component {
       profile.instagram = isEmpty(profile.social.instagram)
         ? ""
         : profile.social.instagram;
-      profile.linkdin = isEmpty(profile.social.linkdin)
+      profile.linkedin = isEmpty(profile.social.linkedin)
         ? ""
-        : profile.social.linkdin;
+        : profile.social.linkedin;
 
-      profile.twiter = isEmpty(profile.social.twiter)
+      profile.twitter = isEmpty(profile.social.twitter)
         ? ""
-        : profile.social.twiter;
+        : profile.social.twitter;
       console.log(profile);
       this.setState({
         handle: profile.handle,
@@ -106,8 +106,8 @@ class EditProfile extends Component {
         youtube: profile.youtube,
         facebook: profile.facebook,
         instagram: profile.instagram,
-        linkdin: profile.linkdin,
-        twiter: profile.twiter,
+        linkedin: profile.linkedin,
+        twitter: profile.twitter,
       });
 
       //console.log(this.state);
@@ -140,13 +140,13 @@ class EditProfile extends Component {
   //     profile.instagram = isEmpty(profile.social.instagram)
   //       ? ""
   //       : profile.social.instagram;
-  //     profile.linkdin = isEmpty(profile.social.linkdin)
+  //     profile.linkedin = isEmpty(profile.social.linkedin)
   //       ? ""
-  //       : profile.social.linkdin;
+  //       : profile.social.linkedin;
 
-  //     profile.twiter = isEmpty(profile.social.twiter)
+  //     profile.twitter = isEmpty(profile.social.twitter)
   //       ? ""
-  //       : profile.social.twiter;
+  //       : profile.social.twitter;
   //     console.log(profile);
   //     return {
   //       handle: profile.handle,
@@ -160,8 +160,8 @@ class EditProfile extends Component {
   //       youtube: profile.youtube,
   //       facebook: profile.facebook,
   //       instagram: profile.instagram,
-  //       linkdin: profile.linkdin,
-  //       twiter: profile.twiter,
+  //       linkedin: profile.linkedin,
+  //       twitter: profile.twitter,
   //     };
 
   //     //console.log(this.state);
@@ -304,7 +304,7 @@ class EditProfile extends Component {
                       name="twitter"
                       onChange={this.onChange}
                       error={errors.twitter}
-                      value={this.state.twiter}
+                      value={this.state.twitter}
                     />
 
                     <InputGroup
@@ -324,7 +324,7 @@ class EditProfile extends Component {
                       name="linkedin"
                       onChange={this.onChange}
                       error={errors.linkedin}
-                      value={this.state.linkdin}
+                      value={this.state.linkedin}
                     />
 
                     <InputGroup

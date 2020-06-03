@@ -42,9 +42,9 @@ module.exports = validateProfileInput = (data) => {
       errors.facebook = "Enter valid facebook url.";
     }
   }
-  if (!isEmpty(data.linkdin)) {
-    if (!Validator.isURL(data.linkdin)) {
-      errors.linkdin = "Enter valid linkdin url.";
+  if (!isEmpty(data.linkedin)) {
+    if (!Validator.isURL(data.linkedin)) {
+      errors.linkedin = "Enter valid linkedin url.";
     }
   }
   return {

@@ -98,9 +98,8 @@ router.post(
     profileFields.social.facebook = !isEmpty(req.body.facebook)
       ? req.body.facebook
       : "";
-    console.log(profileFields);
+
     Profile.findOne({ user: req.user.id }).then((profile) => {
-      console.log(profileFields);
       if (profile) {
         //Update Profile
         Profile.findOneAndUpdate(
@@ -152,7 +151,7 @@ router.get("/user/:user", (req, res) => {
 
 router.get("/handle/:handle", (req, res) => {
   let errors = {};
-  console.log("object");
+
   Profile.findOne({ handle: req.params.handle })
     .populate("user", ["name", "avatar"])
     .then((profile) => {
@@ -188,7 +187,7 @@ router.post(
         current: req.body.current,
         description: req.body.description,
       };
-      console.log(profileExperience);
+
       profile.experience.unshift(profileExperience);
       profile
         .save()
